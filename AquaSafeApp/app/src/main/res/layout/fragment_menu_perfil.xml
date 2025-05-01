@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:backgroundTint="@android:color/transparent"
+    tools:context=".MenuPerfil">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/icone_perfil"
+            android:layout_width="206dp"
+            android:layout_height="169dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/icone_perfil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/info_conta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/botao_longo_azulclaro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="218dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="44dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Informações da Conta"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/info_conta"
+            app:layout_constraintEnd_toEndOf="@+id/info_conta"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/info_conta"
+            app:layout_constraintVertical_bias="0.525" />
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="28dp"
+            android:src="@drawable/svg_perfil"
+            app:layout_constraintBottom_toBottomOf="@+id/info_conta"
+            app:layout_constraintStart_toStartOf="@+id/info_conta"
+            app:layout_constraintTop_toTopOf="@+id/info_conta"
+            app:layout_constraintVertical_bias="0.55" />
+
+        <ImageButton
+            android:id="@+id/hist_consumo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/botao_longo_azulclaro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_conta" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="28dp"
+            android:src="@drawable/svg_relogiotempo"
+            app:layout_constraintBottom_toBottomOf="@+id/hist_consumo"
+            app:layout_constraintStart_toStartOf="@+id/hist_consumo"
+            app:layout_constraintTop_toTopOf="@+id/hist_consumo" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Histórico de Consumo"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/hist_consumo"
+            app:layout_constraintEnd_toEndOf="@+id/hist_consumo"
+            app:layout_constraintHorizontal_bias="0.346"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/hist_consumo" />
+
+        <ImageButton
+            android:id="@+id/config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/botao_longo_azulclaro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hist_consumo" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="28dp"
+            android:src="@drawable/svg_config"
+            app:layout_constraintBottom_toBottomOf="@+id/config"
+            app:layout_constraintStart_toStartOf="@+id/config"
+            app:layout_constraintTop_toTopOf="@+id/config" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Configurações"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/config"
+            app:layout_constraintEnd_toEndOf="@+id/config"
+            app:layout_constraintHorizontal_bias="0.173"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/config" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/botao_longo_azulclaro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/config" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="28dp"
+            android:src="@drawable/svg_sair"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
+            app:layout_constraintStart_toStartOf="@+id/imageButton4"
+            app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Sair da Conta"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
+            app:layout_constraintEnd_toEndOf="@+id/imageButton4"
+            app:layout_constraintHorizontal_bias="0.158"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+
+        <TextView
+            android:id="@+id/nome_empresa_perfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Nome da Empresa"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/info_conta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icone_perfil"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigate"
+    app:startDestination="@id/menuPerfil">
+
+    <fragment
+        android:id="@+id/menuPerfil"
+        android:name="com.aula.aquasafeapp.MenuPerfil"
+        android:label="fragment_menu_perfil"
+        tools:layout="@layout/fragment_menu_perfil" >
+        <action
+            android:id="@+id/action_menuPerfil_to_informacoesConta"
+            app:destination="@id/informacoesConta" />
+    </fragment>
+    <fragment
+        android:id="@+id/informacoesConta"
+        android:name="com.aula.aquasafeapp.InformacoesConta"
+        android:label="fragment_informacoes_conta"
+        tools:layout="@layout/fragment_informacoes_conta" />
+</navigation>
