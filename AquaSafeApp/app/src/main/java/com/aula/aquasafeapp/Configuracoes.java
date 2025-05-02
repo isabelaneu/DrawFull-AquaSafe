@@ -16,10 +16,10 @@ import android.widget.ImageButton;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MenuPerfil#newInstance} factory method to
+ * Use the {@link Configuracoes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuPerfil extends Fragment {
+public class Configuracoes extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,9 +29,10 @@ public class MenuPerfil extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     Dialog dialog;
 
-    public MenuPerfil() {
+    public Configuracoes() {
         // Required empty public constructor
     }
 
@@ -41,11 +42,11 @@ public class MenuPerfil extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MenuPerfil.
+     * @return A new instance of fragment Configuracoes.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuPerfil newInstance(String param1, String param2) {
-        MenuPerfil fragment = new MenuPerfil();
+    public static Configuracoes newInstance(String param1, String param2) {
+        Configuracoes fragment = new Configuracoes();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,48 +66,38 @@ public class MenuPerfil extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_menu_perfil, container, false);
+        View view = inflater.inflate(R.layout.fragment_configuracoes, container, false);
 
-        ImageButton infoConta = view.findViewById(R.id.info_conta);
-        infoConta.setOnClickListener(new View.OnClickListener() {
+        ImageButton gerenciarNot = view.findViewById(R.id.notificacoes);
+        gerenciarNot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = NavHostFragment.findNavController(MenuPerfil.this);
-                Navigation.findNavController(view).navigate(R.id.action_menuPerfil_to_informacoesConta);
+                NavController navController = NavHostFragment.findNavController(Configuracoes.this);
+                Navigation.findNavController(view).navigate(R.id.action_configuracoes_to_gerenciarNotificacoes);
             }
         });
 
-        ImageButton histConsumo = view.findViewById(R.id.hist_consumo);
-        histConsumo.setOnClickListener(new View.OnClickListener() {
+        ImageButton permissoes = view.findViewById(R.id.permissoes_botao);
+        permissoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = NavHostFragment.findNavController(MenuPerfil.this);
-                Navigation.findNavController(view).navigate(R.id.action_menuPerfil_to_historicoConsumo);
+                NavController navController = NavHostFragment.findNavController(Configuracoes.this);
+                Navigation.findNavController(view).navigate(R.id.action_configuracoes_to_permissoes2);
             }
         });
 
-        ImageButton config = view.findViewById(R.id.config);
-        config.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = NavHostFragment.findNavController(MenuPerfil.this);
-                Navigation.findNavController(view).navigate(R.id.action_menuPerfil_to_configuracoes);
-            }
-        });
-
-        ImageButton sairConta = view.findViewById(R.id.sair_conta);
-        sairConta.setOnClickListener(new View.OnClickListener() {
+        Button deletarConta = view.findViewById(R.id.deletar_conta);
+        deletarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.sair_conta);
+                dialog.setContentView(R.layout.deletar_conta);
                 dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);;
                 dialog.setCancelable(false);
-                Button btSim = dialog.findViewById(R.id.sair_sim);
-                Button btNao = dialog.findViewById(R.id.sair_nao);
+                Button btSim = dialog.findViewById(R.id.button_sim);
+                Button btNao = dialog.findViewById(R.id.button_nao);
 
                 btSim.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -120,6 +111,7 @@ public class MenuPerfil extends Fragment {
                 dialog.show();
             }
         });
+
         return view;
     }
 }

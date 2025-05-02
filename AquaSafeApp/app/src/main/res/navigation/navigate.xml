@@ -13,10 +13,43 @@
         <action
             android:id="@+id/action_menuPerfil_to_informacoesConta"
             app:destination="@id/informacoesConta" />
+        <action
+            android:id="@+id/action_menuPerfil_to_historicoConsumo"
+            app:destination="@id/historicoConsumo" />
+        <action
+            android:id="@+id/action_menuPerfil_to_configuracoes"
+            app:destination="@id/configuracoes" />
     </fragment>
     <fragment
         android:id="@+id/informacoesConta"
         android:name="com.aula.aquasafeapp.InformacoesConta"
         android:label="fragment_informacoes_conta"
         tools:layout="@layout/fragment_informacoes_conta" />
+    <fragment
+        android:id="@+id/historicoConsumo"
+        android:name="com.aula.aquasafeapp.HistoricoConsumo"
+        android:label="fragment_historico_consumo"
+        tools:layout="@layout/fragment_historico_consumo" />
+    <fragment
+        android:id="@+id/configuracoes"
+        android:name="com.aula.aquasafeapp.Configuracoes"
+        android:label="fragment_configuracoes"
+        tools:layout="@layout/fragment_configuracoes" >
+        <action
+            android:id="@+id/action_configuracoes_to_gerenciarNotificacoes"
+            app:destination="@id/gerenciarNotificacoes" />
+        <action
+            android:id="@+id/action_configuracoes_to_permissoes2"
+            app:destination="@id/permissoes" />
+    </fragment>
+    <fragment
+        android:id="@+id/gerenciarNotificacoes"
+        android:name="com.aula.aquasafeapp.GerenciarNotificacoes"
+        android:label="fragment_gerenciar_notificacoes"
+        tools:layout="@layout/fragment_gerenciar_notificacoes" />
+    <fragment
+        android:id="@+id/permissoes"
+        android:name="com.aula.aquasafeapp.Permissoes"
+        android:label="fragment_permissoes"
+        tools:layout="@layout/fragment_permissoes" />
 </navigation>
