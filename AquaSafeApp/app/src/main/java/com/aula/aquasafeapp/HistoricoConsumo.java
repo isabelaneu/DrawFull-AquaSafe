@@ -7,6 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.graphics.Color;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +66,57 @@ public class HistoricoConsumo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_historico_consumo, container, false);
+        View view = inflater.inflate(R.layout.fragment_historico_consumo, container, false);
+
+        // === GRÁFICO JANEIRO ===
+        LineChart chart = view.findViewById(R.id.lineChart);
+
+        ArrayList<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(0, 3));
+        entries.add(new Entry(1, 2.5f));
+        entries.add(new Entry(2, 4));
+        entries.add(new Entry(3, 3.8f));
+        entries.add(new Entry(4, 4.2f));
+
+        LineDataSet dataSet = new LineDataSet(entries, "Consumo em Litros");
+        dataSet.setColor(Color.rgb(87, 124, 141));
+        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setCircleColor(Color.rgb(87, 124, 141));
+        dataSet.setLineWidth(2f);
+
+        LineData lineData = new LineData(dataSet);
+        chart.setData(lineData);
+        chart.getDescription().setText("Consumo nos últimos dias");
+        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        chart.getAxisRight().setEnabled(false);
+        chart.animateY(1000);
+        chart.invalidate();
+
+        // === GRÁFICO DEZEMBRO ===
+        LineChart chart2 = view.findViewById(R.id.lineChart2);
+
+        ArrayList<Entry> entries2 = new ArrayList<>();
+        entries2.add(new Entry(0, 2));
+        entries2.add(new Entry(1, 2.2f));
+        entries2.add(new Entry(2, 3.5f));
+        entries2.add(new Entry(3, 3.0f));
+        entries2.add(new Entry(4, 3.7f));
+
+        LineDataSet dataSet2 = new LineDataSet(entries2, "Consumo em Litros");
+        dataSet2.setColor(Color.rgb(87, 124, 141));
+        dataSet2.setValueTextColor(Color.BLACK);
+        dataSet2.setCircleColor(Color.rgb(87, 124, 141));
+        dataSet2.setLineWidth(2f);
+
+        LineData lineData2 = new LineData(dataSet2);
+        chart2.setData(lineData2);
+        chart2.getDescription().setText("Consumo nos últimos dias");
+        chart2.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        chart2.getAxisRight().setEnabled(false);
+        chart2.animateY(1000);
+        chart2.invalidate();
+
+        return view;
     }
+
 }
