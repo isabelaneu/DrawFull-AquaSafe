@@ -1,136 +1,252 @@
 package com.aula.aquasafeapp;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.IOException;
-import android.Manifest;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link InformacoesConta#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class InformacoesConta extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private ImageButton botapFotoPerfil;
-    private ImageView fotoPerfil;
-    private Uri imageUri;
-    private ActivityResultLauncher<Uri> takePictureLauncher;
+    private static final String PREFS_NAME = "InformacoesContaPrefs";
     private static final int REQUEST_CAMERA_PERMISSION = 100;
 
-
-
-    public InformacoesConta() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InformacoesConta.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InformacoesConta newInstance(String param1, String param2) {
-        InformacoesConta fragment = new InformacoesConta();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private Uri imageUri;
+    private ActivityResultLauncher<Uri> takePictureLauncher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_informacoes_conta, container, false);
 
-        botapFotoPerfil = view.findViewById(R.id.camera_info_conta);
-        fotoPerfil = view.findViewById(R.id.foto_perfil);
+        setupEdicaoCampos(view);
+        setupCamera(view);
 
-        // Inicializa o launcher
+        return view;
+    }
+
+    private void setupEdicaoCampos(View view) {
+        setupCampoEdicao(view, R.id.tv_nome, R.id.editar_nome, "nome_empresa", "Editar Nome da Empresa");
+        setupCampoEdicao(view, R.id.tv_ramo, R.id.editar_ramo, "ramo_atuacao", "Editar Ramo de Atuação");
+        setupCampoEdicao(view, R.id.tv_cnpj, R.id.editar_cnpj, "cnpj", "Editar CNPJ");
+        setupCampoEdicao(view, R.id.tv_endereco, R.id.editar_endereco, "endereco", "Editar Endereço");
+    }
+
+    private void setupCampoEdicao(View view, int tvId, int btnId, String prefKey, String dialogTitle) {
+        TextView textView = view.findViewById(tvId);
+        ImageButton button = view.findViewById(btnId);
+
+        // Carrega valor salvo ou mantém o padrão do layout
+        String valorSalvo = carregarDado(prefKey);
+        if (!valorSalvo.isEmpty()) {
+            textView.setText(valorSalvo);
+        }
+
+        button.setOnClickListener(v -> abrirDialogoEdicao(textView, dialogTitle, prefKey));
+    }
+
+    private void abrirDialogoEdicao(final TextView textView, String titulo, final String chavePref) {
+        TextInputLayout textInputLayout = new TextInputLayout(requireContext());
+        textInputLayout.setPadding(
+                getResources().getDimensionPixelOffset(R.dimen.dialog_padding),
+                0,
+                getResources().getDimensionPixelOffset(R.dimen.dialog_padding),
+                0
+        );
+
+        EditText input = new EditText(requireContext());
+        input.setText(textView.getText());
+        textInputLayout.addView(input);
+        textInputLayout.setHint(titulo.replace("Editar ", ""));
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext())
+                .setTitle(titulo)
+                .setView(textInputLayout)
+                .setNegativeButton("Cancelar", null);
+
+        // Validação especial para CNPJ
+        if (textView.getId() == R.id.tv_cnpj) { // ID do campo CNPJ
+            input.addTextChangedListener(new MaskUtil("##.###.###/####-##", input));
+            builder.setPositiveButton("Salvar", (dialog, which) -> {
+                String cnpj = input.getText().toString().replaceAll("[^0-9]", "");
+                if (validarCNPJ(cnpj)) {
+                    String cnpjFormatado = formatarCNPJ(cnpj);
+                    textView.setText(cnpjFormatado);
+                    salvarDado(chavePref, cnpjFormatado);
+                } else {
+                    Toast.makeText(requireContext(), "CNPJ inválido!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            builder.setPositiveButton("Salvar", (dialog, which) -> {
+                String novoTexto = input.getText().toString();
+                textView.setText(novoTexto);
+                salvarDado(chavePref, novoTexto);
+            });
+        }
+
+        builder.show();
+    }
+
+    private void setupCamera(View view) {
+        ImageView fotoPerfil = view.findViewById(R.id.foto_perfil);
+        String uriSalva = carregarDado("foto_perfil_uri");
+        if (!uriSalva.isEmpty()) {
+            fotoPerfil.setImageURI(Uri.parse(uriSalva));
+        }
+        ImageButton botaoFotoPerfil = view.findViewById(R.id.camera_info_conta);
+
+
         takePictureLauncher = registerForActivityResult(
                 new ActivityResultContracts.TakePicture(),
                 result -> {
-                    if (result) {
+                    if (result && imageUri != null) {
                         fotoPerfil.setImageURI(imageUri);
+                        salvarDado("foto_perfil_uri", imageUri.toString());
                     }
                 }
         );
-        botapFotoPerfil.setOnClickListener(v -> solicitarPermissaoCamera());
-        return view;
+
+        botaoFotoPerfil.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                abrirCamera();
+            } else {
+                requestPermissions(new String[]{android.Manifest.permission.CAMERA},
+                        REQUEST_CAMERA_PERMISSION);
+            }
+        });
     }
+
     private void abrirCamera() {
         try {
-            File file = File.createTempFile("foto_perfil", ".jpg", requireContext().getCacheDir());
-            imageUri = FileProvider.getUriForFile(requireContext(), requireContext().getPackageName() + ".fileprovider", file);
-            takePictureLauncher.launch(imageUri);
+            File diretorio = new File(requireContext().getFilesDir(), "fotos");
+            if (!diretorio.exists()) {
+                diretorio.mkdirs();
+            }
+            File file = new File(diretorio, "foto_perfil.jpg");
+            file.createNewFile();            file.deleteOnExit();
+            imageUri = FileProvider.getUriForFile(requireContext(),
+                    requireContext().getPackageName() + ".fileprovider", file);
+
+            if (takePictureLauncher != null) {
+                takePictureLauncher.launch(imageUri);
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            Toast.makeText(requireContext(), "Erro ao criar arquivo para foto", Toast.LENGTH_SHORT).show();
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(requireContext(), "Erro no FileProvider", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private void solicitarPermissaoCamera() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-        } else {
-            abrirCamera();
-        }
-    }
-
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 abrirCamera();
             } else {
-                Toast.makeText(requireContext(), "Permissão da câmera negada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(),
+                        "Permissão da câmera é necessária",
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    private void salvarDado(String chave, String valor) {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        sharedPreferences.edit().putString(chave, valor).apply();
+    }
+
+    private String carregarDado(String chave) {
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(chave, "");
+    }
+
+    private boolean validarCNPJ(String cnpj) {
+        return cnpj != null && cnpj.length() == 14;
+    }
+
+    private String formatarCNPJ(String cnpj) {
+        return cnpj.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3/$4-$5");
+    }
+
+    // Classe interna para máscara
+    private static class MaskUtil implements TextWatcher {
+        private final String mask;
+        private final EditText editText;
+        private boolean isUpdating;
+        private String oldValue = "";
+
+        public MaskUtil(String mask, EditText editText) {
+            this.mask = mask;
+            this.editText = editText;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String value = s.toString();
+            if (isUpdating) {
+                oldValue = value;
+                isUpdating = false;
+                return;
+            }
+
+            String maskedValue = applyMask(value);
+            isUpdating = true;
+            editText.setText(maskedValue);
+            editText.setSelection(maskedValue.length());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+
+        private String applyMask(String value) {
+            StringBuilder maskedValue = new StringBuilder();
+            int maskIndex = 0;
+            int valueIndex = 0;
+
+            while (maskIndex < mask.length() && valueIndex < value.length()) {
+                char maskChar = mask.charAt(maskIndex);
+                char valueChar = value.charAt(valueIndex);
+
+                if (maskChar == '#') {
+                    maskedValue.append(valueChar);
+                    valueIndex++;
+                } else {
+                    maskedValue.append(maskChar);
+                }
+                maskIndex++;
+            }
+
+            return maskedValue.toString();
+        }
+    }
 }
