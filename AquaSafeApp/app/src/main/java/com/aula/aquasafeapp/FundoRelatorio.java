@@ -10,27 +10,26 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-public class FundoSplash extends AppCompatActivity {
+public class FundoRelatorio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_fundo_splash);
+        setContentView(R.layout.activity_fundo_relatorio);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView2);
         NavController navController = navHost.getNavController();
 
-        MaterialToolbar toolbar = findViewById(R.id.materialToolbar);
+        MaterialToolbar toolbar = findViewById(R.id.materialToolbar4);
         setSupportActionBar(toolbar);
 
 // Ativa o botão de voltar
@@ -57,6 +56,6 @@ public class FundoSplash extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        return Navigation.findNavController(this, R.id.fragmentContainerView).navigateUp() || super.onSupportNavigateUp();
+        return Navigation.findNavController(this, R.id.fragmentContainerView2).navigateUp() || super.onSupportNavigateUp();
     }
 }
