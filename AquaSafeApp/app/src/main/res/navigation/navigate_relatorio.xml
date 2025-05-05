@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigate_relatorio"
+    app:startDestination="@id/relatorio_tela1">
+
+    <fragment
+        android:id="@+id/relatorio_tela1"
+        android:name="com.aula.aquasafeapp.relatorio_tela1"
+        android:label="fragment_tela1"
+        tools:layout="@layout/fragment_relatorio_tela1" >
+        <action
+            android:id="@+id/action_relatorio_tela1_to_relatorio_tela2"
+            app:destination="@id/relatorio_tela2" />
+    </fragment>
+    <fragment
+        android:id="@+id/relatorio_tela2"
+        android:name="com.aula.aquasafeapp.relatorio_tela2"
+        android:label="fragment_relatorio_tela2"
+        tools:layout="@layout/fragment_relatorio_tela2" >
+        <action
+            android:id="@+id/action_relatorio_tela2_to_relatorio_tela3"
+            app:destination="@id/relatorio_tela3" />
+    </fragment>
+    <fragment
+        android:id="@+id/relatorio_tela3"
+        android:name="com.aula.aquasafeapp.relatorio_tela3"
+        android:label="fragment_relatorio_tela3"
+        tools:layout="@layout/fragment_relatorio_tela3" >
+        <action
+            android:id="@+id/action_relatorio_tela3_to_relatorio_tela4"
+            app:destination="@id/relatorio_tela4" />
+    </fragment>
+    <fragment
+        android:id="@+id/relatorio_tela4"
+        android:name="com.aula.aquasafeapp.relatorio_tela4"
+        android:label="fragment_relatorio_tela4"
+        tools:layout="@layout/fragment_relatorio_tela4" >
+        <action
+            android:id="@+id/action_relatorio_tela4_to_relatorio_tela5"
+            app:destination="@id/relatorio_tela5" />
+    </fragment>
+    <fragment
+        android:id="@+id/relatorio_tela5"
+        android:name="com.aula.aquasafeapp.relatorio_tela5"
+        android:label="fragment_relatorio_tela5"
+        tools:layout="@layout/fragment_relatorio_tela5" >
+        <action
+            android:id="@+id/action_relatorio_tela5_to_relatorio_tela6"
+            app:destination="@id/relatorio_tela6" />
+    </fragment>
+    <fragment
+        android:id="@+id/relatorio_tela6"
+        android:name="com.aula.aquasafeapp.relatorio_tela6"
+        android:label="fragment_relatorio_tela6"
+        tools:layout="@layout/fragment_relatorio_tela6" />
+</navigation>

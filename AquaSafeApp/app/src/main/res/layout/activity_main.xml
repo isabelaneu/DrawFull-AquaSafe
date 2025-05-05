@@ -48,7 +48,7 @@
 
         <!-- Seção de Relatório Semanal com ícone -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="434dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
@@ -57,26 +57,52 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="Realizar relatório semanal"
-                android:textColor="@color/off_white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins"
-                android:text="Preencha seu relatório e fique por dentro do seu consumo."
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/fazer_relatorio"
+                    android:layout_width="435dp"
+                    android:layout_height="128dp"
+                    android:backgroundTint="@color/azul_medio"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Realizar relatório semanal"
+                    android:textColor="@color/off_white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.01"
+                    app:layout_constraintStart_toStartOf="@+id/fazer_relatorio"
+                    app:layout_constraintTop_toTopOf="@+id/fazer_relatorio" />
+
+                <TextView
+                    android:layout_width="321dp"
+                    android:layout_height="53dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Preencha seu relatório e fique por dentro do seu consumo."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/fazer_relatorio"
+                    app:layout_constraintHorizontal_bias="0.087"
+                    app:layout_constraintStart_toStartOf="@+id/fazer_relatorio"
+                    app:layout_constraintTop_toBottomOf="@+id/textView44"
+                    app:layout_constraintVertical_bias="0.448" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Fonte Poppins SemiBold -->
         </LinearLayout>
@@ -227,7 +253,7 @@
 
                     <ImageButton
                         android:id="@+id/home_dicas"
-                        android:layout_width="154dp"
+                        android:layout_width="180dp"
                         android:layout_height="62dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -339,12 +365,14 @@
 
                     <ImageButton
                         android:id="@+id/home_graficos"
-                        android:layout_width="152dp"
-                        android:layout_height="64dp"
+                        android:layout_width="178dp"
+                        android:layout_height="60dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.333"
                         app:srcCompat="@drawable/botao_longo_azulclaro" />
 
                     <ImageView
@@ -451,8 +479,8 @@
 
                     <ImageButton
                         android:id="@+id/home_vizu_metas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="153dp"
+                        android:layout_height="58dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

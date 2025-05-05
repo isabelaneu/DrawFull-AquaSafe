@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton historico;
     ImageButton dicas;
     ImageButton vizualizar_metas;
-
+    Button fazer_relatorio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, VizualizarMetas.class);
+                startActivity(intent);
+            }
+        });
+
+        fazer_relatorio = findViewById(R.id.fazer_relatorio);
+        fazer_relatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FundoRelatorio.class);
                 startActivity(intent);
             }
         });
