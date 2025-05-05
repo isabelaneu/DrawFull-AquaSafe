@@ -85,6 +85,8 @@
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="282dp"
         android:layout_height="53dp"
+        android:hint="R$ 0,00"
+        android:textAlignment="center"
         tools:ignore="SpeakableTextPresentCheck"
         tools:layout_editor_absoluteX="75dp"
         tools:layout_editor_absoluteY="247dp" />

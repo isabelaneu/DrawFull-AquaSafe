@@ -67,6 +67,7 @@
         android:id="@+id/textInputEditText"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:hint="CNPJ"
         android:importantForAccessibility="no"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="184dp" />
@@ -75,6 +76,7 @@
         android:id="@+id/textInputEditText2"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:hint="Telefone"
         android:importantForAccessibility="no"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="246dp" />
@@ -83,6 +85,7 @@
         android:id="@+id/textInputEditText3"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:hint="Email"
         android:importantForAccessibility="no"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="308dp" />
@@ -91,17 +94,10 @@
         android:id="@+id/textInputEditText5"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:hint="Endereço"
         android:importantForAccessibility="no"
         tools:layout_editor_absoluteX="29dp"
         tools:layout_editor_absoluteY="371dp" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText6"
-        android:layout_width="352dp"
-        android:layout_height="44dp"
-        android:importantForAccessibility="no"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="430dp" />
 
     <Button
         android:id="@+id/avançar"
@@ -115,6 +111,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="352dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/avançar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputEditText5"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
