@@ -27,14 +27,32 @@ public class FundoSplash extends AppCompatActivity {
             return insets;
         });
 
-//        ligar o NavHost
         NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavController navController = navHost.getNavController();
 
-//        ativar toolBar
         MaterialToolbar toolbar = findViewById(R.id.materialToolbar);
         setSupportActionBar(toolbar);
-        NavController navController = navHost.getNavController();
-        NavigationUI.setupActionBarWithNavController(this, navController);
+
+// Ativa o botão de voltar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+// Listener de navegação da toolbar
+        toolbar.setNavigationOnClickListener(v -> {
+            if (navController.getCurrentDestination() != null &&
+                    navController.getCurrentDestination().getId() == R.id.menuPerfil) {
+                // Estamos no primeiro fragmento -> volta para a MainActivity
+                finish();
+            } else {
+                // Estamos em outro fragmento -> volta no stack do NavController
+                navController.navigateUp();
+            }
+        });
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
