@@ -1,6 +1,7 @@
 package com.aula.aquasafeapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,7 +18,13 @@ public class CadastroRamoAtuacaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_ramo_atuacao); // Certifique-se de que esta linha está presente
+        setContentView(R.layout.activity_cadastro_ramo_atuacao);
+
+
+        // Pega os dados das telas anteriores
+        String nomeEmpresa = getIntent().getStringExtra("NOME_EMPRESA");
+        String cnpj = getIntent().getStringExtra("CNPJ");
+        String endereco = getIntent().getStringExtra("ENDERECO");
 
         checkAlimentacao = findViewById(R.id.checkAlimentacao);
         checkBeleza = findViewById(R.id.checkBeleza);
@@ -25,7 +32,6 @@ public class CadastroRamoAtuacaoActivity extends AppCompatActivity {
         checkJardinagem = findViewById(R.id.checkJardinagem);
         checkOutro = findViewById(R.id.checkOutro);
 
-        setupCheckBoxListeners();
 
         voltar = findViewById(R.id.imageVoltar);
         voltar.setOnClickListener(new View.OnClickListener() {
@@ -37,58 +43,31 @@ public class CadastroRamoAtuacaoActivity extends AppCompatActivity {
             }
         });
 
-        passar = findViewById(R.id.btnpassar);
-        passar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CadastroRamoAtuacaoActivity.this, CadastroTempoAtivoActivity.class);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            }
+        ImageButton passar = findViewById(R.id.btnpassar);
+        passar.setOnClickListener(v -> {
+            String ramoAtuacao = getSelectedRamoAtuacao();
+
+            SharedPreferences prefs = getSharedPreferences("DadosEmpresa", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("NOME_EMPRESA", nomeEmpresa);
+            editor.putString("CNPJ", cnpj);
+            editor.putString("ENDERECO", endereco);
+            editor.putString("RAMO_ATUACAO", ramoAtuacao);
+            editor.apply();
+
+            Intent intent = new Intent(CadastroRamoAtuacaoActivity.this, InformacoesConta.class);
+            startActivity(intent);
+            finish();
         });
     }
 
-    private void setupCheckBoxListeners() {
-        CompoundButton.OnCheckedChangeListener checkListener = new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    if (buttonView == checkAlimentacao) {
-                        uncheckOthers(checkAlimentacao);
-                    } else if (buttonView == checkBeleza) {
-                        uncheckOthers(checkBeleza);
-                    } else if (buttonView == checkLavanderia) {
-                        uncheckOthers(checkLavanderia);
-                    } else if (buttonView == checkJardinagem) {
-                        uncheckOthers(checkJardinagem);
-                    } else if (buttonView == checkOutro) {
-                        uncheckOthers(checkOutro);
-                    }
-                }
-            }
-        };
-
-        checkAlimentacao.setOnCheckedChangeListener(checkListener);
-        checkBeleza.setOnCheckedChangeListener(checkListener);
-        checkLavanderia.setOnCheckedChangeListener(checkListener);
-        checkJardinagem.setOnCheckedChangeListener(checkListener);
-        checkOutro.setOnCheckedChangeListener(checkListener);
-    }
-
-    private void uncheckOthers(CheckBox selectedCheckBox) {
-        if (selectedCheckBox != checkAlimentacao) checkAlimentacao.setChecked(false);
-        if (selectedCheckBox != checkBeleza) checkBeleza.setChecked(false);
-        if (selectedCheckBox != checkLavanderia) checkLavanderia.setChecked(false);
-        if (selectedCheckBox != checkJardinagem) checkJardinagem.setChecked(false);
-        if (selectedCheckBox != checkOutro) checkOutro.setChecked(false);
-    }
-
-    public String getSelectedRamoAtuacao() {
+    // Método para pegar o ramo selecionado
+    private String getSelectedRamoAtuacao() {
         if (checkAlimentacao.isChecked()) return "Alimentação";
         if (checkBeleza.isChecked()) return "Beleza";
         if (checkLavanderia.isChecked()) return "Lavanderia";
         if (checkJardinagem.isChecked()) return "Jardinagem";
         if (checkOutro.isChecked()) return "Outro";
         return "";
-    }
+}
 }

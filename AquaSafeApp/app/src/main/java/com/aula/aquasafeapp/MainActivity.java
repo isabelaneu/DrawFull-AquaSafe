@@ -1,5 +1,6 @@
 package com.aula.aquasafeapp;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     ImageButton dicas;
     ImageButton vizualizar_metas;
     Button fazer_relatorio;
+
+    ImageButton menu_registrar;
+    ImageButton menu_graficos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,29 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        menu_registrar = findViewById(R.id.menu_registrar);
+        menu_registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Criar um novo dialog
+                Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.dialog_premiun);
+
+                // Configurar o botão "Fechar"
+                Button buttonFechar = dialog.findViewById(R.id.button_fechar);
+                buttonFechar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss(); // Fecha o dialog
+                    }
+                });
+
+                // Exibir o dialog
+                dialog.show();
+            }
+        });
+
     }
 
 

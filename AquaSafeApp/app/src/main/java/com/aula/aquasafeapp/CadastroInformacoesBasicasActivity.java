@@ -12,7 +12,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 public class CadastroInformacoesBasicasActivity extends AppCompatActivity {
+    private TextInputEditText editTextCNPJ, editTextEndereco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +32,25 @@ public class CadastroInformacoesBasicasActivity extends AppCompatActivity {
             }
         });
 
+
+        String nomeEmpresa = getIntent().getStringExtra("NOME_EMPRESA");
+
+        editTextCNPJ = findViewById(R.id.textInputEditText); // Campo CNPJ
+        editTextEndereco = findViewById(R.id.textInputEditText5); // Campo Endereço
+
         Button avançar = findViewById(R.id.avançar);
 
         avançar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CadastroInformacoesBasicasActivity.this, CadastroRamoAtuacaoActivity.class);
-                startActivity(intent);
+                String cnpj = editTextCNPJ.getText().toString();
+                String endereco = editTextEndereco.getText().toString();
 
+                Intent intent = new Intent(CadastroInformacoesBasicasActivity.this, CadastroRamoAtuacaoActivity.class);
+                intent.putExtra("NOME_EMPRESA", nomeEmpresa);
+                intent.putExtra("CNPJ", cnpj);
+                intent.putExtra("ENDERECO", endereco);
+                startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });

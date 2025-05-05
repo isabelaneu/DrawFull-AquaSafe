@@ -37,13 +37,27 @@ public class InformacoesConta extends Fragment {
     private Uri imageUri;
     private ActivityResultLauncher<Uri> takePictureLauncher;
 
+    private TextView tvNome, tvCnpj, tvEndereco, tvRamo;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_informacoes_conta, container, false);
 
-        setupEdicaoCampos(view);
-        setupCamera(view);
+        tvNome = view.findViewById(R.id.tv_nome);
+        tvCnpj = view.findViewById(R.id.tv_cnpj);
+        tvEndereco = view.findViewById(R.id.tv_endereco);
+        tvRamo = view.findViewById(R.id.tv_ramo);
+
+        SharedPreferences prefs = requireActivity().getSharedPreferences("DadosEmpresa", Context.MODE_PRIVATE);
+        String nomeEmpresa = prefs.getString("NOME_EMPRESA", "");
+        String cnpj = prefs.getString("CNPJ", "");
+        String endereco = prefs.getString("ENDERECO", "");
+        String ramoAtuacao = prefs.getString("RAMO_ATUACAO", "");
+
+        tvNome.setText(nomeEmpresa);
+        tvCnpj.setText(cnpj);
+        tvEndereco.setText(endereco);
+        tvRamo.setText(ramoAtuacao);
 
         return view;
     }

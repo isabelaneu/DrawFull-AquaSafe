@@ -22,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AquaSafeApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".DialogPremiun"
+            android:exported="false" />
         <activity
             android:name=".CadastroInformacoesBasicasActivity"
             android:exported="false" />
@@ -58,6 +60,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -75,9 +78,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
-            
-        <!-- FileProvider deve estar dentro da aplicação -->
+            android:exported="true" /> <!-- FileProvider deve estar dentro da aplicação -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
