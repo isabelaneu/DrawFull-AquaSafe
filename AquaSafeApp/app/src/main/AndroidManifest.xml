@@ -22,9 +22,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AquaSafeApp"
         tools:targetApi="31">
+
         <activity
-            android:name=".FundoRelatorio"
+            android:name=".CadastroInformacoesBasicasActivity"
             android:exported="false" />
+        <activity
+            android:name=".CadastroCarregandoInformacoesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroAtividadesNegocioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroEstimativaCustoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroAcompanhamentoConsumoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroTempoAtivoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroRamoAtuacaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroNomeEmpresaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TelaInicialActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".VizualizarMetas"
             android:exported="false" />
@@ -39,13 +75,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- FileProvider deve estar dentro da aplicação -->
+            android:exported="true" />
+            
+        <!-- FileProvider deve estar dentro da aplicação -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

@@ -3,6 +3,7 @@ package com.aula.aquasafeapp;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.fragment.R;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -103,7 +104,7 @@ public class Configuracoes extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-//                        logica para deletar conta
+                        // logica para deletar conta
                     }
 
                 });
