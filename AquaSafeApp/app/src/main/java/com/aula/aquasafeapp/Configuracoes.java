@@ -2,13 +2,8 @@ package com.aula.aquasafeapp;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.fragment.R;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,35 +17,17 @@ import android.widget.ImageButton;
  */
 public class Configuracoes extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     Dialog dialog;
 
     public Configuracoes() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Configuracoes.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Configuracoes newInstance(String param1, String param2) {
         Configuracoes fragment = new Configuracoes();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("param1", param1);
+        args.putString("param2", param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,8 +36,7 @@ public class Configuracoes extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // Fetch parameters if necessary
         }
     }
 
@@ -74,7 +50,7 @@ public class Configuracoes extends Fragment {
         gerenciarNot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = NavHostFragment.findNavController(Configuracoes.this);
+                // Navega para o fragmento de Gerenciar Notificações
                 Navigation.findNavController(view).navigate(R.id.action_configuracoes_to_gerenciarNotificacoes);
             }
         });
@@ -83,7 +59,7 @@ public class Configuracoes extends Fragment {
         permissoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = NavHostFragment.findNavController(Configuracoes.this);
+                // Navega para o fragmento de Permissões
                 Navigation.findNavController(view).navigate(R.id.action_configuracoes_to_permissoes2);
             }
         });
@@ -94,9 +70,10 @@ public class Configuracoes extends Fragment {
             public void onClick(View v) {
                 dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.deletar_conta);
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);;
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog.setCancelable(false);
+
                 Button btSim = dialog.findViewById(R.id.button_sim);
                 Button btNao = dialog.findViewById(R.id.button_nao);
 
@@ -104,9 +81,15 @@ public class Configuracoes extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        // logica para deletar conta
+                        // Lógica para deletar a conta (adicionar funcionalidade aqui)
                     }
+                });
 
+                btNao.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
                 });
 
                 dialog.show();
