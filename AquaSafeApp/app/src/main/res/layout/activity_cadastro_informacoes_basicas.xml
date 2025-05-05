@@ -14,8 +14,10 @@
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/fundo_splash" />
 
     <ImageButton
@@ -67,37 +69,41 @@
         android:id="@+id/textInputEditText"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:layout_marginTop="24dp"
         android:hint="CNPJ"
         android:importantForAccessibility="no"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="184dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:layout_editor_absoluteX="29dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditText2"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:layout_marginTop="12dp"
         android:hint="Telefone"
         android:importantForAccessibility="no"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="246dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputEditText"
+        tools:layout_editor_absoluteX="29dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditText3"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:layout_marginTop="16dp"
         android:hint="Email"
         android:importantForAccessibility="no"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="308dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputEditText2"
+        tools:layout_editor_absoluteX="29dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditText5"
         android:layout_width="352dp"
         android:layout_height="44dp"
+        android:layout_marginTop="12dp"
         android:hint="Endereço"
         android:importantForAccessibility="no"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="371dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputEditText3"
+        tools:layout_editor_absoluteX="29dp" />
 
     <Button
         android:id="@+id/avançar"
@@ -125,7 +131,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputEditText5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.06" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
