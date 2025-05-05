@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +18,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AquaSafeApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".CadastroInformacoesBasicasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroCarregandoInformacoesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroAtividadesNegocioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroEstimativaCustoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroAcompanhamentoConsumoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroTempoAtivoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroRamoAtuacaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroNomeEmpresaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TelaInicialActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
@@ -25,11 +59,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- FileProvider deve estar dentro da aplicação -->
+        </activity> <!-- FileProvider deve estar dentro da aplicação -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -44,6 +77,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 
 </manifest>

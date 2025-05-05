@@ -1,0 +1,30 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Quando CHECKBOX ESTÁ MARCADO -->
+    <item android:state_checked="true">
+        <layer-list>
+            <!-- Bola grande (azul) -->
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/azul_escuro"/>
+                    <size android:width="24dp" android:height="24dp"/>
+                </shape>
+            </item>
+            <!-- Bolinha pequena (branca) dentro -->
+            <item android:top="6dp" android:left="6dp">
+                <shape android:shape="oval">
+                    <solid android:color="@color/azul_claro"/>
+                    <size android:width="12dp" android:height="12dp"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- Quando CHECKBOX NÃO ESTÁ MARCADO -->
+    <item android:state_checked="false">
+        <!-- Apenas a bola grande (azul) -->
+        <shape android:shape="oval">
+            <solid android:color="@color/azul_escuro"/>
+            <size android:width="24dp" android:height="24dp"/>
+        </shape>
+    </item>
+</selector>
