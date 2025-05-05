@@ -20,6 +20,9 @@ public class CadastroNomeEmpresaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Carrega o layout da tela
+        setContentView(R.layout.activity_cadastro_nome_empresa);
+
         ImageButton voltar = findViewById(R.id.imageVoltar);
 
         voltar.setOnClickListener(new View.OnClickListener() {
