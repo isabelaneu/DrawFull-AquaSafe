@@ -20,6 +20,8 @@ public class CadastroInformacoesBasicasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cadastro_informacoes_basicas);
+
         ImageButton voltar = findViewById(R.id.imageVoltar);
 
         voltar.setOnClickListener(new View.OnClickListener() {

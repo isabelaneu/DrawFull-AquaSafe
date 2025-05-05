@@ -16,6 +16,8 @@ public class CadastroEstimativaCustoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cadastro_estimativa_custo);
+
         ImageButton voltar = findViewById(R.id.imageVoltar);
 
         voltar.setOnClickListener(new View.OnClickListener() {
