@@ -1,6 +1,7 @@
 package com.aula.aquasafeapp;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -80,8 +81,8 @@ public class Configuracoes extends Fragment {
                 btSim.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
-                        // Lógica para deletar a conta (adicionar funcionalidade aqui)
+                        Intent rota = new Intent(getContext(), TelaInicialActivity.class);
+                        startActivity(rota);
                     }
                 });
 

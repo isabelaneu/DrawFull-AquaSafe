@@ -1,6 +1,7 @@
 package com.aula.aquasafeapp;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -111,11 +112,18 @@ public class MenuPerfil extends Fragment {
                 btSim.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
-//                        logica para deletar conta
+                        Intent rota = new Intent(getContext(), TelaInicialActivity.class);
+                        startActivity(rota);
                     }
-
                 });
+
+                btNao.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
 
                 dialog.show();
             }
